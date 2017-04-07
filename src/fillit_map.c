@@ -25,21 +25,17 @@ int			map_size(void)
 	return (a);
 }
 
-char		**create_map(void)
+static char **ft_insert_dots(char **new_map)
 {
-	char	**new_map;
-	int		i;
-	int		j;
+	int i;
+	int j;
 
 	i = 0;
-	j = 0;
-	new_map = (char**)malloc(sizeof(char*) * (g_map_size + 1));
 	while (i < g_map_size)
 	{
 		j = 0;
 		while (j < g_map_size)
 		{
-			new_map[j] = ft_strnew((size_t)g_map_size);
 			new_map[i][j] = '.';
 			j++;
 		}
@@ -47,6 +43,23 @@ char		**create_map(void)
 		i++;
 	}
 	new_map[i] = 0;
+	return (new_map);
+}
+char		**create_map(void)
+{
+	char	**new_map;
+	int		i;
+	int		j;
+
+	i = 0;
+	new_map = (char**)malloc(sizeof(char*) * (g_map_size + 1));
+	j = 0;
+	while (j < g_map_size)
+	{
+		new_map[j] = (char*)malloc(sizeof(char) * (g_map_size + 1));
+		j++;
+	}
+	new_map = ft_insert_dots(new_map);
 	return (new_map);
 }
 

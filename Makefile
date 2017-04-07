@@ -12,18 +12,18 @@
 
 NAME = fillit
 
-CC = gcc -Wall -Werror -Wextra
+CC = gcc
 
 INCL = -I /fillit.h
 
 SRC = src/main.c src/tetri_read.c src/tetri_solve.c src/tetri_chk.c\
-	 src/fillit_map.c
+	 src/fillit_map.c src/tetris_distance.c
 
 all : $(NAME)
 
 $(NAME) :
 	make all -C libft
-	 @$(CC) $(INCL) -o $(NAME) $(SRC) -L libft/ -lft
+	 @$(CC) $(INCL) -o $(NAME) $(SRC) -L libft/ -lft -g
 
 clean :
 	make clean -C libft

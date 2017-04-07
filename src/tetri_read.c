@@ -13,9 +13,6 @@
 #include "../includes/fillit.h"
 #include "../libft/libft.h"
 
-/* function here that checks the blocks and counts them. returns 1 if there's
- * 4 and 0 if there isnt
- */
 char		**ft_array_to_alpha(char **tetris_array)
 {
 	int		i;
@@ -41,7 +38,7 @@ char		**ft_array_to_alpha(char **tetris_array)
 	}
 	return (tetris_array);
 }
-/*function that frees the array of tetris pieces*/
+
 void		ft_tetris_destroy(char **tetris_array)
 {
 	int	i;
@@ -55,7 +52,6 @@ void		ft_tetris_destroy(char **tetris_array)
 	free(tetris_array);
 }
 
-/*function to create the individual array for each tetris piece*/
 char		**ft_tetris_create(char **tetris_array, int fd)
 {
 	char	buff[1];
@@ -80,9 +76,10 @@ char		**ft_tetris_create(char **tetris_array, int fd)
 		tetris_array[a][b] = '\0';
 		a++;
 	}
+	tetris_array[a] = 0;
 	return (tetris_array);
 }
-/* function that reads the file and stores it in an array*/
+
 char		**ft_array_from_file(char *file)
 {
 	int		fd;

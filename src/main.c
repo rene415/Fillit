@@ -25,7 +25,6 @@ int		main(int argc, char **argv)
 			tetris_arr = ft_array_from_file(argv[1]);
 			if (ft_block_chk(tetris_arr))
 			{
-				printf("success");
 				ft_solve(tetris_arr);
 			}
 			else
@@ -33,10 +32,7 @@ int		main(int argc, char **argv)
 			ft_tetris_destroy(tetris_arr);
 		}
 		else
-		{
-			printf("failed\n");
-			exit(1);
-		}
+			ft_putstr("failed");
 	}
 	else
 	{

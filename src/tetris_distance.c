@@ -27,13 +27,19 @@ void		ft_ydist(char **map, t_tetris *tstruct, int col)
 		j = 0;
 		while (map[i][j] != '\0')
 		{
-			if (map[i][j] != '.')
+			if (map[i][j] != '.' && k == 0)
 			{
 				fp = j;
-				tstruct->y_value[col][k++] = 0;
+				tstruct->y_value[col][k] = 0;
+				k++;
+//				printf("k value1: %d\n", tstruct->y_value[col][k]);
 			}
 			if (k != 0 && map[i][j] != '.')
-				tstruct->y_value[col][k++] = j - fp;
+			{
+				tstruct->y_value[col][k] = j - fp;
+				k++;
+//				printf("k value-other: %d\n", tstruct->y_value[col][k]);
+			}
 			j++;
 		}
 		i++;
@@ -47,25 +53,41 @@ void		ft_xdist(char **map, t_tetris *tstruct, int col)
 	int	j;
 	int	k;
 	int	fp;
+//	int shit;
 
 	i = 0;
 	k = 0;
+	fp = 0;
 	while (map[i] != '\0')
 	{
 		j = 0;
 		while (map[i][j] != '\0')
 		{
-			if (map[i][j] != '.')
+			if (map[i][j] != '.' && k == 0)
 			{
 				fp = i;
-				tstruct->x_value[col][k++] = 0;
+				// printf("fp1: %d\n", fp);
+				// printf("i1: %d\n", i);
+				tstruct->x_value[col][k] = 0;
+			//	printf("k value1: %d\n", tstruct->x_value[col][k]);
+				k++;				
 			}
 			if (k != 0 && map[i][j] != '.')
-				tstruct->x_value[col][k++] = i - fp;
+			{
+		//		printf("k = %d\n", k);
+		//		shit = i - fp;
+				tstruct->x_value[col][k] = i - fp;
+		//		printf("fp-o: %d\n", fp);
+		//		printf("i-o: %d\n", i);
+		//		printf("k should = %d\n", i - fp);
+		//		printf("k valueother: %d\n", tstruct->x_value[col][k]);
+				k++;
+			}
 			j++;
 		}
 		i++;
 	}
+//	printf("--------\n");
 	tstruct->x_value[col][4] = '\0';
 }
 
@@ -87,15 +109,18 @@ void				ft_get_dim(t_tetris *tstruct, int col)
 	while (tstruct->y_value[col][y] != '\0')
 	{
 		if (tstruct->width[col] < tstruct->y_value[col][y])
-			tstruct->width[col] = tstruct->y_value[col][y]];
+			tstruct->width[col] = tstruct->y_value[col][y];
 		y++;
 	}
+	tstruct->height[g_num_tetris] = '\0';
+	tstruct->width[g_num_tetris] = '\0';
 	tstruct->letter[col] = 'A' + col;
+	tstruct->letter[g_num_tetris] = '\0';
 }
 
 t_tetris			*ft_tet_distance(char **tet_cpy, t_tetris *tstruct)
 {
-	int	col;
+	int			col;
 	char 		**map;
 
 	col = 0;
@@ -108,6 +133,7 @@ t_tetris			*ft_tet_distance(char **tet_cpy, t_tetris *tstruct)
 		free(map);
 		col++;
 	}
+	return (tstruct);
 }
 
 t_tetris            *ft_create_struct(void)
@@ -116,7 +142,7 @@ t_tetris            *ft_create_struct(void)
 	int k;
 
 	k = 0;
-	if (!(new_struct = (t_tetris)malloc(sizeof(t_tetris))))
+	if (!(new_struct = malloc(sizeof(t_tetris))))
 		return (0);
 	if (!(new_struct->x_value = (int**)malloc(sizeof(int*) * g_num_tetris + 1)))
 		return (0);
@@ -124,17 +150,18 @@ t_tetris            *ft_create_struct(void)
 		return (0);
 	while (k < g_num_tetris)
 	{
-		new_struct->x_value[k] = (int)malloc(sizeof(int) * 5);
+		new_struct->x_value[k] = (int*)malloc(sizeof(int) * 5);
 		k++;
 	}
 	k = 0;
 	while (k < g_num_tetris)
 	{
-		new_struct->y_value[k] = (int)malloc(sizeof(int) * 5);
+		new_struct->y_value[k] = (int*)malloc(sizeof(int) * 5);
 		k++;
 	}
-	new_struct->height = (int)malloc(sizeof(int) * g_num_tetris + 1);
-	new_struct->width = (int)malloc(sizeof(int) * g_num_tetris + 1);
+	new_struct->height = (int*)malloc(sizeof(int) * g_num_tetris + 1);
+	new_struct->width = (int*)malloc(sizeof(int) * g_num_tetris + 1);
+	new_struct->letter = (char*)malloc(sizeof(char) * g_num_tetris + 1);
 	return (new_struct);
 }
 

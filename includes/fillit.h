@@ -25,6 +25,9 @@
 # define TRUE					1
 # define FALSE					0
 
+int						g_num_tetris;
+int						g_map_size;
+
 typedef struct			s_tetris
 {
 	int					**x_value;
@@ -32,6 +35,7 @@ typedef struct			s_tetris
 	int					*height;
 	int					*width;
 	char				*letter;
+	int					tet;
 }						t_tetris;
 
 void					ft_ydist(char **map, t_tetris *tstruct, int col);
@@ -39,9 +43,6 @@ void					ft_xdist(char **map, t_tetris *tstruct, int col);
 void					ft_get_dim(t_tetris *tstruct, int col);
 t_tetris				*ft_tet_distance(char **tet_cpy, t_tetris *tstruct);
 t_tetris				*ft_create_struct(void);
-
-int						g_num_tetris;
-int						g_map_size;
 
 int						ft_file_read(int fd);
 int						ft_block_chk(char **tet_arr);
@@ -58,8 +59,8 @@ char					**ft_array_from_file(char *file);
 int						*ft_make_indx_arr(char *tet_array);
 
 void					ft_solve(char **tetris_array);
-void					ft_place_piece(char **solution_map, t_tetris *tstruct, int tet);
-int						ft_check_placement(char **solution_map, t_tetris *tstruct, int tet);
+void					ft_place_piece(char **solution_map, t_tetris *tstruct, int y, int k);
+int						ft_check_placement(char **solution_map, t_tetris *tstruct, int y, int k);
 int						ft_solve_tetris(t_tetris *tstruct, char **solution_map, int tet);
-int						ft_get_count(t_tetris *tstruct, char **solution_map, int tet);
+int						ft_get_count(t_tetris *tstruct, char **solution_map, int y, int k);
 #endif
