@@ -36,14 +36,14 @@ OBJ = $(SRC:.c=.o)
 all : $(NAME)
 
 $(NAME) :
-	$(CC) $(CMPFLAGS)  $(SRC) -I$(HEAD)
-	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+	@$(CC) $(CMPFLAGS)  $(SRC) -I$(HEAD)
+	@ar rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
 
 clean :
-	/bin/rm -f $(OBJ)
+	@/bin/rm -f $(OBJ)
 
 fclean: clean
-	/bin/rm -f $(NAME)
+	@/bin/rm -f $(NAME)
 
 re: fclean all
