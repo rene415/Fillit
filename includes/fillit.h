@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <sys/stat.h>
 # include <sys/uio.h>
-/*# include <stdio.h>*/
+# include <stdio.h>
 
 # define CHK_BLOCK(x)			((x == '#') ? 1 : 0)
 # define TRUE					1
@@ -37,6 +37,8 @@ typedef struct			s_tetris
 	char				*letter;
 	int					tet_value;
 }						t_tetris;
+
+int						ft_check_read(int fd);
 
 void					ft_ydist(char **map, t_tetris *tstruct, int col);
 void					ft_xdist(char **map, t_tetris *tstruct, int col);

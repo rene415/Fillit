@@ -82,7 +82,7 @@ void	print_map(char **new_map)
 			ft_putchar(new_map[i][j]);
 			j++;
 		}
-		printf("\n");
+		ft_putchar('\n');
 		i++;
 	}
 }

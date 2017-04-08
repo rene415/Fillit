@@ -17,17 +17,19 @@ CC = gcc -Wall -Werror -Wextra
 INCL = -I /fillit.h
 
 SRC = src/main.c src/tetri_read.c src/tetri_solve.c src/tetri_chk.c\
-	 src/fillit_map.c src/tetris_distance.c
+	 src/fillit_map.c src/tetris_distance.c src/last_read.c
+
+OBJ = $(SRC:.c=.o)
 
 all : $(NAME)
 
 $(NAME) :
 	make all -C libft
-	 @$(CC) $(INCL) -o $(NAME) $(SRC) -L libft/ -lft
+	 @$(CC) $(INCL) -L libft/ -lft $(SRC) -o $(NAME)
 
 clean :
 	make clean -C libft
-	/bin/rm -f
+	@/bin/rm -f $(OBJ)
 
 fclean : clean
 	make fclean -C libft

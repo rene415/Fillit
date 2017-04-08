@@ -20,6 +20,8 @@ static	int	file_check(int fd, char *buff, int num_columns, int num_lines)
 	{
 		if (*buff != '\n' && *buff != '.' && *buff != '#')
 			return (0);
+		// if (*buff == '\n' && *buff++ != '\0')
+		// 	return (0);
 		else if (*buff == '\n')
 		{
 			num_lines++;
@@ -37,7 +39,10 @@ static	int	file_check(int fd, char *buff, int num_columns, int num_lines)
 		}
 		else
 			num_columns++;
+//	if (*buff == '\n' && *buff++ != '\0')
+//		return (0);
 	}
+	close(fd);
 	return ((*buff == '\n') ? TRUE : FALSE);
 }
 
@@ -52,7 +57,7 @@ int			ft_file_read(int fd)
 	num_columns = 0;
 	if (fd < 1)
 		return (0);
-	if (file_check(fd, buff, num_columns, num_lines) == 1)
+	if ((file_check(fd, buff, num_columns, num_lines) == 1))
 		return (1);
 	else
 		return (0);
