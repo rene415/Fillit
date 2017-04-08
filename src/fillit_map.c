@@ -74,11 +74,6 @@ void	print_map(char **new_map)
 		j = 0;
 		while (new_map[i][j] != '\0')
 		{
-			// if (j == 4)
-			// {
-			// 	ft_putchar('\n');
-			// 	j = 0;
-			// }
 			ft_putchar(new_map[i][j]);
 			j++;
 		}

@@ -30,28 +30,18 @@ void		ft_ydist(char **map, t_tetris *tstruct, int col)
 			if (map[i][j] != '.' && k == 0)
 			{
 				fp = j;
-	//			 printf("fp1: %d\n", fp);
-	//			 printf("i1: %d\n", i);
 				tstruct->y_value[col][k] = 0;
-	//			 printf("k value1: %d\n", tstruct->y_value[col][k]);
 				k++;
 			}
 			else if (k != 0 && map[i][j] != '.')
 			{
-//				 printf("k = %d\n", k);
 				tstruct->y_value[col][k] = j - fp;
-				 // printf("fp-o: %d\n", fp);
-				 // printf("j-o: %d\n", i);
-				 // printf("k should = %d\n", j - fp);
-				 // printf("k valueother: %d\n", tstruct->y_value[col][k]);
 				k++;
-//				printf("k value-other: %d\n", tstruct->y_value[col][k]);
 			}
 			j++;
 		}
 		i++;
 	}
-	// printf("--------------\n");
 	tstruct->y_value[col][4] = '\0';
 }
 
@@ -61,7 +51,6 @@ void		ft_xdist(char **map, t_tetris *tstruct, int col)
 	int	j;
 	int	k;
 	int	fp;
-//	int shit;
 
 	i = 0;
 	k = 0;
@@ -74,28 +63,18 @@ void		ft_xdist(char **map, t_tetris *tstruct, int col)
 			if (map[i][j] != '.' && k == 0)
 			{
 				fp = i;
-		//		 printf("fp1: %d\n", fp);
-		//		 printf("i1: %d\n", i);
 				tstruct->x_value[col][k] = 0;
-				// printf("k value1: %d----\n", tstruct->x_value[col][k]);
 				k++;				
 			}
 			else if (k != 0 && map[i][j] != '.')
 			{
-				// printf("k = %d\n", k);
-		//		shit = i - fp;
 				tstruct->x_value[col][k] = i - fp;
-		//		printf("fp-o: %d\n", fp);
-		//		printf("i-o: %d\n", i);
-				// printf("k should = %d\n", i - fp);
-				// printf("k valueother: %d-----\n", tstruct->x_value[col][k]);
 				k++;
 			}
 			j++;
 		}
 		i++;
 	}
-	// printf("--------\n");
 	tstruct->x_value[col][4] = '\0';
 }
 

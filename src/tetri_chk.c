@@ -13,15 +13,12 @@
 #include "../includes/fillit.h"
 #include "../libft/libft.h"
 
-/* checks the file*/
 static	int	file_check(int fd, char *buff, int num_columns, int num_lines)
 {
 	while ((read(fd, buff, 1)))
 	{
 		if (*buff != '\n' && *buff != '.' && *buff != '#')
 			return (0);
-		// if (*buff == '\n' && *buff++ != '\0')
-		// 	return (0);
 		else if (*buff == '\n')
 		{
 			num_lines++;
@@ -39,14 +36,11 @@ static	int	file_check(int fd, char *buff, int num_columns, int num_lines)
 		}
 		else
 			num_columns++;
-//	if (*buff == '\n' && *buff++ != '\0')
-//		return (0);
 	}
 	close(fd);
 	return ((*buff == '\n') ? TRUE : FALSE);
 }
 
-/* reads file*/
 int			ft_file_read(int fd)
 {
 	char buff[1];
@@ -63,7 +57,6 @@ int			ft_file_read(int fd)
 		return (0);
 }
 
-/*how many tetris pieces*/
 static	int	count_blocks(char *tet_arr)
 {
 	int	i;
@@ -79,7 +72,6 @@ static	int	count_blocks(char *tet_arr)
 	return ((num_chars == 4) ? TRUE : FALSE);
 }
 
-/*number of touches to validate the tetris piece*/
 static	int	ft_touch_check(char *tet_arr)
 {
 	int	i;

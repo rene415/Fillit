@@ -13,11 +13,11 @@
 #include "../includes/fillit.h"
 #include "../libft/libft.h"
 
-int		ft_check_spaces(char **solution_map)
+int			ft_check_spaces(char **solution_map)
 {
-	int x;
-	int y;
-	int count;
+	int		x;
+	int		y;
+	int		count;
 
 	y = 0;
 	x = 0;
@@ -35,7 +35,7 @@ int		ft_check_spaces(char **solution_map)
 	}
 	return ((count == (g_map_size * g_map_size) - (g_num_tetris * 4)) ? 1 : 0);
 }
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	char	**tetris_arr;
 	int		fd;
