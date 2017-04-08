@@ -23,7 +23,7 @@ all : $(NAME)
 
 $(NAME) :
 	make all -C libft
-	 @$(CC) $(INCL) -o $(NAME) $(SRC) -L libft/ -lft -g
+	 @$(CC) $(INCL) -o $(NAME) $(SRC) -L libft/ -lft
 
 clean :
 	make clean -C libft

@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <sys/stat.h>
 # include <sys/uio.h>
-# include <stdio.h>
+/*# include <stdio.h>*/
 
 # define CHK_BLOCK(x)			((x == '#') ? 1 : 0)
 # define TRUE					1

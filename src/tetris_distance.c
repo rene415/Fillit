@@ -77,18 +77,18 @@ void		ft_xdist(char **map, t_tetris *tstruct, int col)
 		//		 printf("fp1: %d\n", fp);
 		//		 printf("i1: %d\n", i);
 				tstruct->x_value[col][k] = 0;
-				printf("k value1: %d----\n", tstruct->x_value[col][k]);
+				// printf("k value1: %d----\n", tstruct->x_value[col][k]);
 				k++;				
 			}
 			else if (k != 0 && map[i][j] != '.')
 			{
-				printf("k = %d\n", k);
+				// printf("k = %d\n", k);
 		//		shit = i - fp;
 				tstruct->x_value[col][k] = i - fp;
 		//		printf("fp-o: %d\n", fp);
 		//		printf("i-o: %d\n", i);
-				printf("k should = %d\n", i - fp);
-				printf("k valueother: %d-----\n", tstruct->x_value[col][k]);
+				// printf("k should = %d\n", i - fp);
+				// printf("k valueother: %d-----\n", tstruct->x_value[col][k]);
 				k++;
 			}
 			j++;

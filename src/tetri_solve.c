@@ -23,8 +23,8 @@ int		ft_get_count(t_tetris *tstruct, char **solution_map, int y, int k)
 	count = 0;
 	i = 0;
 	h = 0;
-	printf("y value: %i\n", y);
-	printf("k value: %i\n", k);
+	// printf("y value: %i\n", y);
+	// printf("k value: %i\n", k);
 //	printf("map before check: \n");
 //	print_map(solution_map);
 	while (solution_map[i] != '\0')
@@ -56,11 +56,11 @@ int		ft_check_placement(char **solution_map, t_tetris *tstruct, int y, int k)
 	int ret_val;
 
 	ret_val = ft_get_count(tstruct, solution_map, y, k);
-	if (ret_val == 1)
-		printf("counting success!\n");
-	else
-		printf("fail\n");
-	printf("----------------------\n");
+	// if (ret_val == 1)
+	// 	printf("counting success!\n");
+	// else
+	// 	printf("fail\n");
+	// printf("----------------------\n");
 	return ((ret_val == 1) ? 1 : 0);
 }
 
@@ -84,16 +84,17 @@ void	ft_place_piece(char **solution_map, t_tetris *tstruct, int y, int k)
 			{
 				if ((i == tstruct->x_value[tstruct->tet_value][h] + y) &&
 					(j == tstruct->y_value[tstruct->tet_value][h] + k))
+				{
 					solution_map[i][j] = tstruct->letter[tstruct->tet_value];
+					h++;
+				}
 			}
-		//	printf("i = %i, j = %i, x_value = %i, y_value = %i\n", i, j, tstruct->x_value[tstruct->tet_value][h], tstruct->y_value[tstruct->tet_value][h]);
 			j++;
-			h++;
 		}
 		i++;
 	}
-	print_map(solution_map);
-	printf("----------------\n");
+	// print_map(solution_map);
+	// printf("----------------\n");
 //	printf("not working yet\n");
 }
 
@@ -104,7 +105,7 @@ int		ft_solve_tetris(t_tetris *tstruct, char **solution_map, int tet)
 
 	y = 0;
 	tstruct->tet_value = tet;
-	printf("tet value: %d\n", tstruct->tet_value);
+	// printf("tet value: %d\n", tstruct->tet_value);
 	if (ft_check_spaces(solution_map))
 		return (1);
 //	if (tstruct->x_value[tstruct->tet_value][tet] == '\0')
@@ -148,19 +149,19 @@ void	ft_solve(char **tetris_array)
 	tstruct = ft_create_struct();
 	tstruct = ft_tet_distance(tet_cpy, tstruct);
 	i = 0;
-	printf("starting solve\n");
+	// printf("starting solve\n");
 	while (!flag)
 	{
 		g_map_size = map_size() + i;
 		solution_map = create_map();
-		printf("g_map_size = %i\n", g_map_size);
+		// printf("g_map_size = %i\n", g_map_size);
 		if (ft_solve_tetris(tstruct, solution_map, 0))
 		{
 			flag = 1;
-			printf("SOLVING success!~\n");
+			// printf("SOLVING success!~\n");
 			print_map(solution_map);
 		}
-		break;
+//		break;
 		free(solution_map);
 		i++;
 	}
