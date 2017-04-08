@@ -18,7 +18,7 @@ int			map_size(void)
 	int 	a;
 	int		pieces;
 
-	a = 2;
+	a = 4;
 	pieces = (g_num_tetris * 4);
 	while ((a * a) - pieces < 0)
 		a++;
@@ -69,19 +69,20 @@ void	print_map(char **new_map)
 	int	j;
 
 	i = 0;
-	j = 0;
 	while (new_map[i] != '\0')
 	{
 		j = 0;
-		while (new_map[j] != '\0')
+		while (new_map[i][j] != '\0')
 		{
-			if (j != 0 && j == g_map_size)
-				ft_putchar('\n');
-			else
-				ft_putchar(new_map[i][j]);
+			// if (j == 4)
+			// {
+			// 	ft_putchar('\n');
+			// 	j = 0;
+			// }
+			ft_putchar(new_map[i][j]);
 			j++;
 		}
+		printf("\n");
 		i++;
 	}
-	ft_putchar('\n');
 }

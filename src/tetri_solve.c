@@ -23,19 +23,28 @@ int		ft_get_count(t_tetris *tstruct, char **solution_map, int y, int k)
 	count = 0;
 	i = 0;
 	h = 0;
+	printf("y value: %i\n", y);
+	printf("k value: %i\n", k);
+//	printf("map before check: \n");
+//	print_map(solution_map);
 	while (solution_map[i] != '\0')
 	{
 		j = 0;
-		while (solution_map[i][j] != '\0')
+		while (solution_map[i][j] != '\0' && count != 4)
 		{
-			if (solution_map[i][j] == '.') //fucking up here
+			while (solution_map[i][j] >= 'A' && solution_map[i][j] <= 'Z')
+				j++;
+			if (solution_map[i][j] == '.')
 			{
-				if ((i == tstruct->x_value[tstruct->tet][h] + y) && 
-					(j == tstruct->y_value[tstruct->tet][h] + k))
+				if ((i == (tstruct->x_value[tstruct->tet_value][h]) + y) && 
+					(j == (tstruct->y_value[tstruct->tet_value][h]) + k))
+				{
 					count++;
+					h++;
+				}
 			}
+//			printf("count = %i i = %i, j = %i, x_value[h] = [%i], y_value[h] = [%i]\n", count, i, j, ((tstruct->x_value[tstruct->tet_value][h]) + y), (tstruct->y_value[tstruct->tet_value][h]) + k);
 			j++;
-			h++;
 		}
 		i++;
 	}
@@ -44,21 +53,48 @@ int		ft_get_count(t_tetris *tstruct, char **solution_map, int y, int k)
 
 int		ft_check_placement(char **solution_map, t_tetris *tstruct, int y, int k)
 {
-	int count;
+	int ret_val;
 
-	count = ft_get_count(tstruct, solution_map, y, k);
-//	printf("return value: %d\n", count);
-	return ((count == 1) ? 1 : 0);
+	ret_val = ft_get_count(tstruct, solution_map, y, k);
+	if (ret_val == 1)
+		printf("counting success!\n");
+	else
+		printf("fail\n");
+	printf("----------------------\n");
+	return ((ret_val == 1) ? 1 : 0);
 }
 
 void	ft_place_piece(char **solution_map, t_tetris *tstruct, int y, int k)
 {
-//	tet = 0;
-//	int i = 0;
-//	tstruct->x_value[tet][i] = solution_map[tet][i];
-//	printf("%c\n", solution_map[tet][i]);
-	printf("not working yet\n");
+	int i;
+	int j;
+	int h;
 
+	i = 0;
+	h = 0;
+	// printf("entering placement\n");
+	// printf("y value in placement: %i\n", y);
+	// printf("k value in placement: %i\n", k);
+	while (solution_map[i] != '\0')
+	{
+		j = 0;
+		while (solution_map[i][j] != '\0')
+		{
+			if (solution_map[i][j] == '.')//fucking up here
+			{
+				if ((i == tstruct->x_value[tstruct->tet_value][h] + y) &&
+					(j == tstruct->y_value[tstruct->tet_value][h] + k))
+					solution_map[i][j] = tstruct->letter[tstruct->tet_value];
+			}
+		//	printf("i = %i, j = %i, x_value = %i, y_value = %i\n", i, j, tstruct->x_value[tstruct->tet_value][h], tstruct->y_value[tstruct->tet_value][h]);
+			j++;
+			h++;
+		}
+		i++;
+	}
+	print_map(solution_map);
+	printf("----------------\n");
+//	printf("not working yet\n");
 }
 
 int		ft_solve_tetris(t_tetris *tstruct, char **solution_map, int tet)
@@ -67,8 +103,12 @@ int		ft_solve_tetris(t_tetris *tstruct, char **solution_map, int tet)
 	int k;
 
 	y = 0;
-//	printf("begin solve recursion\n");
-	tstruct->tet = tet;
+	tstruct->tet_value = tet;
+	printf("tet value: %d\n", tstruct->tet_value);
+	if (ft_check_spaces(solution_map))
+		return (1);
+//	if (tstruct->x_value[tstruct->tet_value][tet] == '\0')
+//		return (1);
 	while (solution_map[y] != '\0')
 	{
 		k = 0;
@@ -77,16 +117,19 @@ int		ft_solve_tetris(t_tetris *tstruct, char **solution_map, int tet)
 	//		if (((tstruct->height[tet] + y)  > g_map_size) || 
 //				((tstruct->width[tet] + k) > g_map_size))
 	//			return (0);
-	//		printf("tet value: %d\n", tet);
 			if (ft_check_placement(solution_map, tstruct, y, k))
 			{
 				ft_place_piece(solution_map, tstruct, y, k);
+		//		break;
 				if (ft_solve_tetris(tstruct, solution_map, ++tet))
 					return (1);
+				//ft_remove_tetri(tstruct, solution_map, --tet);
 			}
+	//		break;
 			k++;
 			//ft_remove_tetri(solution_map, --tet);
 		}
+//		break;
 		y++;
 	}
 	return(0);
@@ -110,12 +153,15 @@ void	ft_solve(char **tetris_array)
 	{
 		g_map_size = map_size() + i;
 		solution_map = create_map();
+		printf("g_map_size = %i\n", g_map_size);
 		if (ft_solve_tetris(tstruct, solution_map, 0))
 		{
 			flag = 1;
+			printf("SOLVING success!~\n");
 			print_map(solution_map);
 		}
-//		free_map(solution_map);
+		break;
+		free(solution_map);
 		i++;
 	}
 }

@@ -12,7 +12,7 @@
 
 NAME = fillit
 
-CC = gcc
+CC = gcc -Wall -Werror -Wextra
 
 INCL = -I /fillit.h
 

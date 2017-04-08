@@ -35,7 +35,7 @@ typedef struct			s_tetris
 	int					*height;
 	int					*width;
 	char				*letter;
-	int					tet;
+	int					tet_value;
 }						t_tetris;
 
 void					ft_ydist(char **map, t_tetris *tstruct, int col);
@@ -63,4 +63,5 @@ void					ft_place_piece(char **solution_map, t_tetris *tstruct, int y, int k);
 int						ft_check_placement(char **solution_map, t_tetris *tstruct, int y, int k);
 int						ft_solve_tetris(t_tetris *tstruct, char **solution_map, int tet);
 int						ft_get_count(t_tetris *tstruct, char **solution_map, int y, int k);
+int						ft_check_spaces(char **solution_map);
 #endif
